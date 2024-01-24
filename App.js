@@ -1,21 +1,39 @@
+import React from 'react';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
 
 export default function App() {
-  const [message, setMessage] = useState('');
-  const showAlert = () => {
-    Alert.alert('Hello', 'Syötit tekstin: ' + message);
+  const [message1, setMessage1] = useState('');
+  const [message2, setMessage2] = useState('');
+  const [message3, setMessage3] = useState('')
+  const showAlert1 = () => {
+    Alert.alert(message1 + message2);
+  }
+  const showAlert2 = () => {
+    Alert.alert(message1 - message2);
   }
 
   return (
     <View style={styles.container}>
-      <TextInput 
-      placeholder='Syötä tekstiä'
-      onChangeText={text => setMessage(text)}
-      />
-      <Button title="Press me" onPress={showAlert} color="#e7a7fa" />
-      <StatusBar style="auto" />
+      <View style={styles.container}>
+        <Text>Result: </Text>
+        <TextInput
+          style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={text => setMessage1(text)}
+          inputMode='numeric'
+        />
+        <TextInput
+          style={{ width: 200, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={text => setMessage2(text)}
+          inputMode='numeric'
+        />
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+          <Button title="+" onPress={showAlert1} color="#e7a7fa" />
+          <Button title="-" onPress={showAlert2} />
+          <StatusBar style="auto" />
+        </View>
+      </View>
     </View>
   );
 }
